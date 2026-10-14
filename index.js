@@ -74,6 +74,7 @@ async function loop() {
             if (now >= lastChangeTime + analysisTimeMs) {
                 console.log("Current stable class opdateret");
                 currentStableClass = bestPrediction.className;
+                console.log(currentStableClass);
                 lastClass = currentStableClass;
                 markHigestPrediction(currentStableClass);
             }
@@ -105,17 +106,21 @@ function findBestPrediction(predictions) {
     ));
 }
 
+function normalizeClass(str) {
+    return str.toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
+}
+
 function markHigestPrediction(className) {
-    const lower = className.toLowerCase();
-    if (lower.includes("metal")) {
+    const normalized = normalizeClass(className);
+    if (normalized.includes("metal")) {
         console.log("Metal er fundet");
         resetMarking();
         selectMarkering(markeringsobjekter[0]);
-    } else if (lower.includes("plastik")) {
+    } else if (normalized.includes("plastik")) {
         console.log("Plastik er fundet");
         resetMarking();
         selectMarkering(markeringsobjekter[1]);
-    } else if (lower.includes("rest")) {
+    } else if (normalized.includes("rest")) {
         console.log("Restaffald er fundet");
         resetMarking();
         selectMarkering(markeringsobjekter[2]);
