@@ -106,25 +106,22 @@ function findBestPrediction(predictions) {
 }
 
 function markHigestPrediction(className) {
-    switch (className) {
-        case "metal":
-            console.log("Metal er fundet");
-            resetMarking();
-            selectMarkering(markeringsobjekter[0]);
-            break;
-        case "plastik":
-            console.log("Plastik er fundet");
-            resetMarking();
-            selectMarkering(markeringsobjekter[1]);
-            break;
-        case "restaffald":
-            console.log("Restaffald er fundet");
-            resetMarking();
-            selectMarkering(markeringsobjekter[2]);
-            break;
-        default:
-            console.log("uidentificerbart objekt");
-            resetMarking();
+    const lower = className.toLowerCase();
+    if (lower.includes("metal")) {
+        console.log("Metal er fundet");
+        resetMarking();
+        selectMarkering(markeringsobjekter[0]);
+    } else if (lower.includes("plastik")) {
+        console.log("Plastik er fundet");
+        resetMarking();
+        selectMarkering(markeringsobjekter[1]);
+    } else if (lower.includes("rest")) {
+        console.log("Restaffald er fundet");
+        resetMarking();
+        selectMarkering(markeringsobjekter[2]);
+    } else {
+        console.log("uidentificerbart objekt");
+        resetMarking();
     }
 }
 
